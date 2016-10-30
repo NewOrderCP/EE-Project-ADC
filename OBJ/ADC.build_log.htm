@@ -17,28 +17,27 @@ Library Manager: ArmAr.exe V5.05 update 1 (build 106)
 Hex Converter:   FromElf.exe V5.05 update 1 (build 106)
 CPU DLL:         SARMCM3.DLL V5.14.0.0
 Dialog DLL:      DCM.DLL V1.13.1.0
-Target DLL:      UL2CM3.DLL V1.155.0.0
+Target DLL:      Segger\JL2CM3.dll V2.99.13.0
 Dialog DLL:      TCM.DLL V1.14.4.0
  
 <h2>Project:</h2>
 C:\Users\TF-PC\Desktop\EE&NE\EE-Project-ADC\USER\ADC.uvprojx
-Project File Date:  05/08/2016
+Project File Date:  10/29/2016
 
 <h2>Output:</h2>
 Build target 'Target 1'
 compiling main.c...
+main.c(20): warning:  #177-D: variable "key" was declared but never referenced
+        u8 key;
 main.c(23): warning:  #177-D: variable "reclen" was declared but never referenced
         u8 reclen=0;
 main.c(26): warning:  #177-D: variable "temp" was declared but never referenced
         float temp;
-main.c: 2 warnings, 0 errors
-compiling stm32f10x_dma.c...
-compiling stm32f10x_exti.c...
-compiling stm32f10x_tim.c...
+main.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=41260 RO-data=6932 RW-data=60 ZI-data=2252  
+Program Size: Code=40956 RO-data=6932 RW-data=60 ZI-data=2252  
 FromELF: creating hex file...
-"..\OBJ\ADC.axf" - 0 Error(s), 2 Warning(s).
+"..\OBJ\ADC.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   C:\Users\TF-PC\Desktop\EE&NE\EE-Project-ADC\USER\RTE
