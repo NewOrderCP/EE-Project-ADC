@@ -35,10 +35,12 @@
 	POINT_COLOR=RED;
 	while(HC05_Init())
 	{
-		LCD_ShowString(20,50,200,24,24,"BT CONNECT ERROR!");
+		LCD_ShowString(20,50,200,24,24,"BT CONNECTING...");
 	}
+	LCD_Clear(WHITE);
 	 
-	HC05_Set_Cmd("AT+ROLE=1");	
+//	HC05_Set_Cmd("AT+ROLE=1");	
+//	HC05_Set_Cmd("AT+NAME=master");
 	 
 	POINT_COLOR=BLUE;
 		 LCD_ShowString(60,190,200,16,16,"BT:");	

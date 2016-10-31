@@ -51,7 +51,7 @@ u8 HC05_Init(void)
 	{
 		HC05_KEY=1;					//KEY置高,进入AT模式
 		delay_ms(10);
-		u2_printf("AT\r\n");		//发送AT测试指令
+		u2_printf("AT+LINK=2016,3,74927\r\n");		//发送AT测试指令
 		HC05_KEY=0;					//KEY拉低,退出AT模式
 		for(t=0;t<10;t++) 			//最长等待50ms,来接收HC05模块的回应
 		{
