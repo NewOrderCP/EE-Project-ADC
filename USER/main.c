@@ -126,7 +126,7 @@
 
 //		else delay_ms(10);	
 		
-		if(t==5)
+		if(t==2)
 		{
 			if(send_adcx)					
 			{
