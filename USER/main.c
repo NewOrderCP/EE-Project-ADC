@@ -97,7 +97,7 @@
 		
 		adcx=Get_Adc_Average(ADC_Channel_7,10);
 		LCD_ShowxNum(132,150,adcx,4,16,0);//ÏÔÊ¾ADC6µÄÖµ
-		if(adcx>3000)
+		if(adcx>0)
 		{
 			send_adcx=adcx+60000;
 			num_adcx++;
