@@ -33,9 +33,9 @@
 ..\obj\main.o: ..\SYSTEM\delay\delay.h
 ..\obj\main.o: ..\SYSTEM\usart\usart.h
 ..\obj\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-..\obj\main.o: ..\HARDWARE\LCD\lcd.h
-..\obj\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-..\obj\main.o: ..\HARDWARE\ADC\adc.h
 ..\obj\main.o: ..\HARDWARE\KEY\key.h
 ..\obj\main.o: ..\HARDWARE\USART2\usart2.h
 ..\obj\main.o: ..\HARDWARE\HC05\hc05.h
+..\obj\main.o: ..\HARDWARE\OLED\OLED_I2C.h
+..\obj\main.o: ..\HARDWARE\hc04\hc04.h
+..\obj\main.o: entrance.h

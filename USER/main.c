@@ -2,116 +2,128 @@
 #include "delay.h"
 #include "sys.h"
 #include "usart.h"
-#include "lcd.h"
-#include "adc.h"
 #include "key.h"
 #include "usart2.h"
 #include "hc05.h"
+#include "OLED_I2C.h"
+#include "hc04.h"
+#include "entrance.h"
 
+extern float dis1,dis2,dis3,dis4,dis5,dis6,dis7 ;	
+u32 hc_send;
 
-//ALIENTEK Mini STM32开发板范例代码15
-//ADC实验  
-//技术支持：www.openedv.com
-//广州市星翼电子科技有限公司
-   	
+extern int p1,p2,p3,p4,p5,p6,p7;
+extern int d1,d2,d3,d4;
+	
  int main(void)
  { 
 	u8 t;
 	u8 key;
 	 
 	u8 sendbuf[20];	  
-	u8 reclen=0;
-	 
-	u16 adcx,send_adcx,num_adcx;
+
 	float temp;
+	 
+	u8 display1[16];	
+	u8 display2[16];
+	 
+//	 FLASH_Unlock();
+//	 FLASH_ReadOutProtection(DISABLE);
 	 
 	delay_init();	    	 //延时函数初始化	  
 	uart_init(9600);	 	//串口初始化为9600
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //设置NVIC中断分组2:2位抢占优先级，2位响应优先级
 //	KEY_Init();				//初始化按键
+//	Adc_Init();				//ADC初始化	
+	HC_SR04_Init();
+	 
+	I2C_Configuration();
+	OLED_Init();						//OLED初始化
+	OLED_Fill(0x00);					//OLED全屏灭
+	 
 
- 	LCD_Init();
- 	Adc_Init();		  		//ADC初始化	
-	POINT_COLOR=RED;
-	while(HC05_Init())
-	{
-		LCD_ShowString(20,50,200,24,24,"BT CONNECTING...");
-	}
-	LCD_Clear(WHITE);
+//	while(HC05_Init())
+//	{
+//		sprintf((char*)display2,"BT CONNECTING...");
+//		OLED_ShowStr(0,2,display2,2);
+//	}
+//	OLED_Fill(0x00);					//OLED全屏灭
 	 
 //	HC05_Set_Cmd("AT+ROLE=1");	
 //	HC05_Set_Cmd("AT+NAME=master");
-	 
-	POINT_COLOR=BLUE;
-		 LCD_ShowString(60,190,200,16,16,"BT:");	
-	 
-		 LCD_ShowString(60,50,200,16,16,"ADC_CH1:");	
-		 LCD_ShowString(60,70,200,16,16,"ADC_CH2:");	
-		 LCD_ShowString(60,90,200,16,16,"ADC_CH3:");
-		 LCD_ShowString(60,110,200,16,16,"ADC_CH4:");	
-		 LCD_ShowString(60,130,200,16,16,"ADC_CH5:");	      
-		 LCD_ShowString(60,150,200,16,16,"ADC_CH6:");	   
-	POINT_COLOR=RED;	
+	delay_ms(1000);
+
 
 	while(1)
 	{
-		adcx=Get_Adc_Average(ADC_Channel_0,10);
-		LCD_ShowxNum(132,50,adcx,4,16,0);//显示ADC1的值
-		if(adcx>3000)
+		hc1_running();
+		if(dis1<200)
 		{
-			send_adcx=adcx+10000;
-			num_adcx++;
+			sprintf((char*)display1,"1: %6.3f",dis1);
+			OLED_ShowStr(0,0,display1,2);//显示HC1的值
 		}
-				
-		adcx=Get_Adc_Average(ADC_Channel_1,10);
-		LCD_ShowxNum(132,70,adcx,4,16,0);//显示ADC2的值
-		if(adcx>3000)
-		{
-			send_adcx=adcx+20000;
-			num_adcx++;
-		}
-		
-		adcx=Get_Adc_Average(ADC_Channel_4,10);
-		LCD_ShowxNum(132,90,adcx,4,16,0);//显示ADC3的值
-		if(adcx>3000)
-		{
-			send_adcx=adcx+30000;
-			num_adcx++;
-		}
-		
-		adcx=Get_Adc_Average(ADC_Channel_5,10);
-		LCD_ShowxNum(132,110,adcx,4,16,0);//显示ADC4的值
-		if(adcx>3000)
-		{
-			send_adcx=adcx+40000;
-			num_adcx++;
-		}
-		
-		adcx=Get_Adc_Average(ADC_Channel_6,10);
-		LCD_ShowxNum(132,130,adcx,4,16,0);//显示ADC5的值
-		if(adcx>3000)
-		{
-			send_adcx=adcx+50000;
-			num_adcx++;
-		}
-		
-		adcx=Get_Adc_Average(ADC_Channel_7,10);
-		LCD_ShowxNum(132,150,adcx,4,16,0);//显示ADC6的值
-		if(adcx>0)
-		{
-			send_adcx=adcx+60000;
-			num_adcx++;
-		}
-		
-		if(num_adcx==0)
-			send_adcx=0;
-		
-		num_adcx=0;
-		
-		
-	
-//		key=KEY_Scan(0);
+		else dis1=0;
 
+		hc2_running();
+		if(dis2<60)
+		{
+			sprintf((char*)display1,"2: %6.3f",dis2);
+			OLED_ShowStr(0,2,display1,2);//显示HC2的值
+		}
+		else dis2=0;
+		
+		hc3_running();
+		if(dis3<60)
+		{
+			sprintf((char*)display1,"3: %6.3f",dis3);
+			OLED_ShowStr(0,2,display1,2);//显示HC3的值
+		}
+		else dis3=0;
+		
+		hc4_running();
+		if(dis4<60)
+		{
+			sprintf((char*)display1,"4: %6.3f",dis4);
+			OLED_ShowStr(0,2,display1,2);//显示HC4的值
+		}
+		else dis4=0;
+		
+		hc5_running();
+		if(dis5<60)
+		{
+			sprintf((char*)display1,"5: %6.3f",dis5);
+			OLED_ShowStr(0,2,display1,2);//显示HC5的值
+		}
+		else dis5=0;
+
+		hc6_running();
+		if(dis6<120)
+		{
+			sprintf((char*)display1,"6: %6.3f",dis6);
+			OLED_ShowStr(0,4,display1,2);//显示HC6的值
+		}
+		else dis6=0;
+		
+		hc7_running();
+		if(dis7<120)
+		{
+			sprintf((char*)display1,"7: %6.3f",dis7);
+			OLED_ShowStr(0,4,display1,2);//显示HC7的值
+		}
+		else dis7=0;
+		
+		
+		sprintf((char*)display2,"BT: %d",hc_send);
+		OLED_ShowStr(0,6,display2,2);					//显示发送数据	
+		u2_printf("%d\r\n",hc_send);					//发送到蓝牙模块
+		
+		while(d1)
+			fromOtoD();									//起点到D库
+		
+		while(d2)
+			fromDtoC();									//D库到C库
+		
+//		key=KEY_Scan(0);
 //		if(key==KEY0_PRES)						//切换模块主从设置
 //		{
 //			key=HC05_Get_Role();
@@ -123,26 +135,6 @@
 //				HC05_Set_Cmd("AT+RESET");	//复位ATK-HC05模块
 //			}
 //		}
-
 //		else delay_ms(10);	
-		
-		if(t==2)
-		{
-			if(send_adcx)					
-			{
-				sprintf((char*)sendbuf,"%d",send_adcx);
-				LCD_ShowString(92,190,200,16,16,sendbuf);		//显示发送数据	
-				u2_printf("%d\r\n",send_adcx);		//发送到蓝牙模块
-			}   
-			t=0;
-		}			
-			  															     				   
-		t++;	
-	}		
-		
-		
-//		temp=(float)adcx*(3.3/4096);
-//		adcx=temp;
-
-											    
+	}											    
 }	
