@@ -16,16 +16,14 @@ extern int p1,p2,p3,p4,p5,p6,p7;
 extern int d1,d2,d3,d4;
 	
  int main(void)
- { 
+ { 	 
 	u8 t;
-	u8 key;
-	 
-	u8 sendbuf[20];	  
-
-	float temp;
-	 
+	u8 key; 
+	float temp;	 
 	u8 display1[16];	
 	u8 display2[16];
+	 
+	d1=1;		//等于1开循环，等于0关循环只检测超声波
 	 
 //	 FLASH_Unlock();
 //	 FLASH_ReadOutProtection(DISABLE);
@@ -33,15 +31,11 @@ extern int d1,d2,d3,d4;
 	delay_init();	    	 //延时函数初始化	  
 	uart_init(9600);	 	//串口初始化为9600
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //设置NVIC中断分组2:2位抢占优先级，2位响应优先级
-//	KEY_Init();				//初始化按键
-//	Adc_Init();				//ADC初始化	
-	HC_SR04_Init();
-	 
-	I2C_Configuration();
+	HC_SR04_Init();	 					//蓝牙初始化
+	I2C_Configuration();				//I2C初始化
 	OLED_Init();						//OLED初始化
 	OLED_Fill(0x00);					//OLED全屏灭
 	 
-
 //	while(HC05_Init())
 //	{
 //		sprintf((char*)display2,"BT CONNECTING...");
@@ -52,7 +46,6 @@ extern int d1,d2,d3,d4;
 //	HC05_Set_Cmd("AT+ROLE=1");	
 //	HC05_Set_Cmd("AT+NAME=master");
 	delay_ms(1000);
-
 
 	while(1)
 	{
@@ -112,16 +105,18 @@ extern int d1,d2,d3,d4;
 		}
 		else dis7=0;
 		
-		
-		sprintf((char*)display2,"BT: %d",hc_send);
-		OLED_ShowStr(0,6,display2,2);					//显示发送数据	
-		u2_printf("%d\r\n",hc_send);					//发送到蓝牙模块
-		
 		while(d1)
+		{
 			fromOtoD();									//起点到D库
+			delay_ms(10);
+		}
 		
 		while(d2)
+		{
 			fromDtoC();									//D库到C库
+			delay_ms(10);
+		}
+		
 		
 //		key=KEY_Scan(0);
 //		if(key==KEY0_PRES)						//切换模块主从设置

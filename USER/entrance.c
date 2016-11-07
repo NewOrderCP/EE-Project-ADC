@@ -13,8 +13,8 @@
 #define WIDE 8
 
 extern float dis1,dis2,dis3,dis4,dis5,dis6,dis7 ;	
-int p1=1,p2,p3,p4,p5,p6,p7;
-int d1=1,d2=0,d3=0,d4=0;
+int n1=1,n2,p1,p2,p3,p4,p5,p6,p7;				//每一步标识位
+int d1,d2,d3,d4;								//每次循环标识位
 extern u32 hc_send;
 
 u8 display3[16];	
@@ -26,7 +26,12 @@ void fromOtoD(void)
 	hc6_running();
 	hc7_running();
 	
-		hc_send=0;						//方向0，直行		
+		if(dis1>300||n1==1)
+		{
+			hc_send=0;					//方向0，直行	
+			n1=0;	
+			p1=1;
+		}
 		
 		if(dis1<15||p1==1)
 		{
@@ -37,10 +42,13 @@ void fromOtoD(void)
 		
 		if(dis1>80||dis1<105||dis2<55||p2==1)
 		{
-			hc_send=0;					//方向0，右转90
+			hc_send=180;				//方向180，右转90
 			p2=0;
 			p3=1;
 		}
+		sprintf((char*)display3,"BT: %d",hc_send);
+		OLED_ShowStr(0,6,display3,2);					//显示发送数据	
+		u2_printf("%d\r\n",hc_send);					//发送到蓝牙模块
 		
 		if(dis7>95||dis7<120||p3==1)
 		{
@@ -52,24 +60,24 @@ void fromOtoD(void)
 			sprintf((char*)display3,"BT: %d",hc_send);
 			OLED_ShowStr(0,6,display3,2);			//显示发送数据	
 			u2_printf("%d\r\n",hc_send);			//发送到蓝牙模块		
-			delay_ms(200);
+			delay_ms(1000);
 			
-			hc_send=222;							//原地旋转180度指令
+			hc_send=333;							//转向方向0指令
 			sprintf((char*)display3,"BT: %d",hc_send);
 			OLED_ShowStr(0,6,display3,2);			//显示发送数据	
 			u2_printf("%d\r\n",hc_send);			//发送到蓝牙模块	
+			delay_ms(2000);
 			
-			hc_send=555;							//到达指定车库指令
+			hc_send=222;							//到达指定车库指令
 			sprintf((char*)display3,"BT: %d",hc_send);
 			OLED_ShowStr(0,6,display3,2);			//显示发送数据	
-			u2_printf("%d\r\n",hc_send);			//发送到蓝牙模块	
-			
+			u2_printf("%d\r\n",hc_send);			//发送到蓝牙模块				
 			delay_ms(1000);
 			
 			hc2_running();
 			hc6_running();
 			
-			OLED_Fill(0x00);					//OLED全屏灭
+			OLED_Fill(0x00);						//OLED全屏灭
 			sprintf((char*)display3,"Front: %6.3f cm",35-(dis2+LONG));
 			OLED_ShowStr(0,0,display3,2);								//显示前边线距离
 			sprintf((char*)display3,"Behind: %6.3f cm",dis2);
@@ -82,11 +90,10 @@ void fromOtoD(void)
 			delay_ms(3000);
 			
 			p3=0;
-			p4=1;
+			n2=1;
 			d1=0;	
 			d2=1;				
 		}
-		
 }
 
 void fromDtoC(void)
@@ -97,7 +104,12 @@ void fromDtoC(void)
 	hc6_running();
 	hc7_running();
 	
-		hc_send=0;							//方向0，直行		
+		if(dis1>300||n2==1)
+		{
+			hc_send=0;						//方向0，直行
+			n2=0;
+			p4=1;
+		}			
 		
 		if(dis1>80||dis1<105||dis2<55||p4==1)
 		{
@@ -108,12 +120,15 @@ void fromDtoC(void)
 		
 		if(dis1>105||dis1<140||dis3<55||p5==1)
 		{
-			hc_send=0;						//方向0，右转90
+			hc_send=180;					//方向180，右转90
 			p5=0;
 			p6=1;
 		}
+		sprintf((char*)display3,"BT: %d",hc_send);
+		OLED_ShowStr(0,6,display3,2);					//显示发送数据	
+		u2_printf("%d\r\n",hc_send);					//发送到蓝牙模块
 		
-		if(dis7>60||p6==1)
+		if(dis7>60||dis7<95||p6==1)
 		{
 			while(dis7>95)
 			{
@@ -123,24 +138,24 @@ void fromDtoC(void)
 			sprintf((char*)display3,"BT: %d",hc_send);
 			OLED_ShowStr(0,6,display3,2);			//显示发送数据	
 			u2_printf("%d\r\n",hc_send);			//发送到蓝牙模块		
-			delay_ms(200);
+			delay_ms(1000);
 			
-			hc_send=333;							//原地左转90度指令
+			hc_send=666;							//转向方向270指令
 			sprintf((char*)display3,"BT: %d",hc_send);
 			OLED_ShowStr(0,6,display3,2);			//显示发送数据	
 			u2_printf("%d\r\n",hc_send);			//发送到蓝牙模块	
+			delay_ms(1000);
 			
-			hc_send=555;							//到达指定车库指令
+			hc_send=222;							//到达指定车库指令
 			sprintf((char*)display3,"BT: %d",hc_send);
 			OLED_ShowStr(0,6,display3,2);			//显示发送数据	
-			u2_printf("%d\r\n",hc_send);			//发送到蓝牙模块	
-			
+			u2_printf("%d\r\n",hc_send);			//发送到蓝牙模块		
 			delay_ms(1000);
 			
 			hc3_running();
 			hc6_running();
-			
-			OLED_Fill(0x00);					//OLED全屏灭
+					
+			OLED_Fill(0x00);						//OLED全屏灭
 			sprintf((char*)display3,"Front: %6.3f cm",dis6-60);
 			OLED_ShowStr(0,0,display3,2);								//显示前边线距离
 			sprintf((char*)display3,"Behind: %6.3f cm",35-(dis6-60+LONG));
