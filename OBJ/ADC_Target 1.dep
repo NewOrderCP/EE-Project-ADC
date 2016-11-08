@@ -1,5 +1,5 @@
 Dependencies for Project 'ADC', Target 'Target 1': (DO NOT MODIFY !)
-F (.\main.c)(0x58200069)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\LCD -I..\HARDWARE\ADC -I..\HARDWARE\HC05 -I..\HARDWARE\USART2 -I..\HARDWARE\KEY -I..\HARDWARE\OLED -I..\HARDWARE\hc04-I C:\Users\TF-PC\Desktop\EE&NE\EE-Project-ADC\USER\RTE-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I D:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
+F (.\main.c)(0x5821FB5A)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\LCD -I..\HARDWARE\ADC -I..\HARDWARE\HC05 -I..\HARDWARE\USART2 -I..\HARDWARE\KEY -I..\HARDWARE\OLED -I..\HARDWARE\hc04-I C:\Users\TF-PC\Desktop\EE&NE\EE-Project-ADC\USER\RTE-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I D:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
 I (..\HARDWARE\LED\led.h)(0x532ACAF4)
 I (..\SYSTEM\sys\sys.h)(0x550F951B)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
@@ -35,7 +35,7 @@ I (..\SYSTEM\usart\usart.h)(0x50517A82)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
 I (..\HARDWARE\KEY\key.h)(0x532ADF6A)
 I (..\HARDWARE\USART2\usart2.h)(0x53C5FAB4)
-I (..\HARDWARE\HC05\hc05.h)(0x53379BD1)
+I (..\HARDWARE\HC05\hc05.h)(0x5821F4C2)
 I (..\HARDWARE\OLED\OLED_I2C.h)(0x5344B51A)
 I (..\HARDWARE\hc04\hc04.h)(0x581C1072)
 I (entrance.h)(0x581F4124)
@@ -100,7 +100,7 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x504F415E)
 I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
-F (.\entrance.c)(0x581FFFF6)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\LCD -I..\HARDWARE\ADC -I..\HARDWARE\HC05 -I..\HARDWARE\USART2 -I..\HARDWARE\KEY -I..\HARDWARE\OLED -I..\HARDWARE\hc04-I C:\Users\TF-PC\Desktop\EE&NE\EE-Project-ADC\USER\RTE-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I D:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o ..\obj\entrance.o --omf_browse ..\obj\entrance.crf --depend ..\obj\entrance.d)
+F (.\entrance.c)(0x58202E7D)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\LCD -I..\HARDWARE\ADC -I..\HARDWARE\HC05 -I..\HARDWARE\USART2 -I..\HARDWARE\KEY -I..\HARDWARE\OLED -I..\HARDWARE\hc04-I C:\Users\TF-PC\Desktop\EE&NE\EE-Project-ADC\USER\RTE-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I D:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o ..\obj\entrance.o --omf_browse ..\obj\entrance.crf --depend ..\obj\entrance.d)
 I (..\HARDWARE\LED\led.h)(0x532ACAF4)
 I (..\SYSTEM\sys\sys.h)(0x550F951B)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
@@ -136,7 +136,7 @@ I (..\SYSTEM\usart\usart.h)(0x50517A82)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
 I (..\HARDWARE\KEY\key.h)(0x532ADF6A)
 I (..\HARDWARE\USART2\usart2.h)(0x53C5FAB4)
-I (..\HARDWARE\HC05\hc05.h)(0x53379BD1)
+I (..\HARDWARE\HC05\hc05.h)(0x5821F4C2)
 I (..\HARDWARE\OLED\OLED_I2C.h)(0x5344B51A)
 I (..\HARDWARE\hc04\hc04.h)(0x581C1072)
 I (entrance.h)(0x581F4124)
@@ -239,7 +239,7 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x504F415E)
 I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
 I (..\SYSTEM\delay\delay.h)(0x55CC2E59)
-F (..\HARDWARE\HC05\hc05.c)(0x581F4124)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\LCD -I..\HARDWARE\ADC -I..\HARDWARE\HC05 -I..\HARDWARE\USART2 -I..\HARDWARE\KEY -I..\HARDWARE\OLED -I..\HARDWARE\hc04-I C:\Users\TF-PC\Desktop\EE&NE\EE-Project-ADC\USER\RTE-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I D:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o ..\obj\hc05.o --omf_browse ..\obj\hc05.crf --depend ..\obj\hc05.d)
+F (..\HARDWARE\HC05\hc05.c)(0x5821FADC)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\LCD -I..\HARDWARE\ADC -I..\HARDWARE\HC05 -I..\HARDWARE\USART2 -I..\HARDWARE\KEY -I..\HARDWARE\OLED -I..\HARDWARE\hc04-I C:\Users\TF-PC\Desktop\EE&NE\EE-Project-ADC\USER\RTE-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I D:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o ..\obj\hc05.o --omf_browse ..\obj\hc05.crf --depend ..\obj\hc05.d)
 I (..\SYSTEM\delay\delay.h)(0x55CC2E59)
 I (..\SYSTEM\sys\sys.h)(0x550F951B)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
@@ -273,7 +273,7 @@ I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
 I (..\SYSTEM\usart\usart.h)(0x50517A82)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
 I (..\HARDWARE\USART2\usart2.h)(0x53C5FAB4)
-I (..\HARDWARE\HC05\hc05.h)(0x53379BD1)
+I (..\HARDWARE\HC05\hc05.h)(0x5821F4C2)
 I (..\HARDWARE\LED\led.h)(0x532ACAF4)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
 I (D:\Keil_v5\ARM\ARMCC\include\math.h)(0x5475F2FE)

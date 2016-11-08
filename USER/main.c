@@ -31,17 +31,17 @@ extern int d1,d2,d3,d4;
 	delay_init();	    	 //延时函数初始化	  
 	uart_init(9600);	 	//串口初始化为9600
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //设置NVIC中断分组2:2位抢占优先级，2位响应优先级
-	HC_SR04_Init();	 					//蓝牙初始化
+	HC_SR04_Init();	 					//超声波初始化
 	I2C_Configuration();				//I2C初始化
 	OLED_Init();						//OLED初始化
 	OLED_Fill(0x00);					//OLED全屏灭
 	 
-//	while(HC05_Init())
-//	{
-//		sprintf((char*)display2,"BT CONNECTING...");
-//		OLED_ShowStr(0,2,display2,2);
-//	}
-//	OLED_Fill(0x00);					//OLED全屏灭
+	while(HC05_Init())
+	{
+		sprintf((char*)display2,"BT CONNECTING...");
+		OLED_ShowStr(0,2,display2,2);
+	}
+	OLED_Fill(0x00);					//OLED全屏灭
 	 
 //	HC05_Set_Cmd("AT+ROLE=1");	
 //	HC05_Set_Cmd("AT+NAME=master");
@@ -118,18 +118,18 @@ extern int d1,d2,d3,d4;
 		}
 		
 		
-//		key=KEY_Scan(0);
-//		if(key==KEY0_PRES)						//切换模块主从设置
-//		{
-//			key=HC05_Get_Role();
-//			if(key!=0XFF)
-//			{
-//				key=!key;  					//状态取反	   
-//				if(key==0)HC05_Set_Cmd("AT+ROLE=0");
-//				else HC05_Set_Cmd("AT+ROLE=1");
-//				HC05_Set_Cmd("AT+RESET");	//复位ATK-HC05模块
-//			}
-//		}
-//		else delay_ms(10);	
+		key=KEY_Scan(0);
+		if(key==KEY0_PRES)						//切换模块主从设置
+		{
+			key=HC05_Get_Role();
+			if(key!=0XFF)
+			{
+				key=!key;  					//状态取反	   
+				if(key==0)HC05_Set_Cmd("AT+ROLE=0");
+				else HC05_Set_Cmd("AT+ROLE=1");
+				HC05_Set_Cmd("AT+RESET");	//复位ATK-HC05模块
+			}
+		}
+		else delay_ms(10);	
 	}											    
 }	
