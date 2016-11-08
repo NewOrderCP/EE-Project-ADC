@@ -28,7 +28,7 @@ void fromOtoD(void)
 	
 		if(dis1>300||n1==1)
 		{
-			hc_send=0;					//方向0，直行	
+			hc_send=100;					//方向0，直行	
 			n1=0;	
 			p1=1;
 		}
@@ -106,7 +106,7 @@ void fromDtoC(void)
 	
 		if(dis1>300||dis2<30||n2==1)
 		{
-			hc_send=0;						//方向0，直行
+			hc_send=100;						//方向0，直行
 			n2=0;
 			p4=1;
 		}			

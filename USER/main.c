@@ -118,18 +118,18 @@ extern int d1,d2,d3,d4;
 		}
 		
 		
-		key=KEY_Scan(0);
-		if(key==KEY0_PRES)						//切换模块主从设置
-		{
-			key=HC05_Get_Role();
-			if(key!=0XFF)
-			{
-				key=!key;  					//状态取反	   
-				if(key==0)HC05_Set_Cmd("AT+ROLE=0");
-				else HC05_Set_Cmd("AT+ROLE=1");
-				HC05_Set_Cmd("AT+RESET");	//复位ATK-HC05模块
-			}
-		}
-		else delay_ms(10);	
+//		key=KEY_Scan(0);
+//		if(key==KEY0_PRES)						//切换模块主从设置
+//		{
+//			key=HC05_Get_Role();
+//			if(key!=0XFF)
+//			{
+//				key=!key;  					//状态取反	   
+//				if(key==0)HC05_Set_Cmd("AT+ROLE=0");
+//				else HC05_Set_Cmd("AT+ROLE=1");
+//				HC05_Set_Cmd("AT+RESET");	//复位ATK-HC05模块
+//			}
+//		}
+//		else delay_ms(10);	
 	}											    
 }	
