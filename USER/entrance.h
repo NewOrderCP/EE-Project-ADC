@@ -4,5 +4,6 @@
 
 void fromOtoD(void);
 void fromDtoC(void);
+void fromCtoO(void);
 
 #endif

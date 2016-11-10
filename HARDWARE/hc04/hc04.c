@@ -2,22 +2,26 @@
 #include "sys.h"
 #include "delay.h"
 #include "hc04.h"
+#include "math.h"
 
 #define SIDE 3
 
 u16 cnt;    //计数限定最大距离  在hcrs04.h中可见
 u32 tim;		//定时时间    在hcrs04.h中可见
 float dis1,dis2,dis3,dis4,dis5,dis6,dis7 ;				        //距离
+float ave[3],error[3];
+int i=0;
 
 void HC_SR04_Init(void)										
 {
  
 	GPIO_InitTypeDef  GPIO_InitStructure;					
  	
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB|RCC_APB2Periph_GPIOA, ENABLE);	
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB|RCC_APB2Periph_GPIOA| RCC_APB2Periph_AFIO, ENABLE);	
+	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable,ENABLE);
 	
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12|GPIO_Pin_14|GPIO_Pin_3|GPIO_Pin_5;		//ECHO
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; 		//浮空输入
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD; 		//下拉输入
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;		 
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 	
@@ -28,7 +32,7 @@ void HC_SR04_Init(void)
 	GPIO_SetBits(GPIOB, GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15|GPIO_Pin_3|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_8);
 	
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8|GPIO_Pin_10|GPIO_Pin_12;		//ECHO
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; 		//浮空输入
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD; 		//下拉输入
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;		 
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 	
@@ -43,6 +47,8 @@ void HC_SR04_Init(void)
 
 void hc1_running(void)
 {
+	for(i=0;i<3;i++)
+	{
 		PBout(13)=1;
 		delay_us(15);
 		PBout(13)=0;
@@ -54,11 +60,24 @@ void hc1_running(void)
 		tim=tim+cnt*10;
 		dis1=tim*0.017-SIDE;
 		TIM2->CNT=0;											
-		cnt=0; 	
+		cnt=0; 
+		ave[i]=dis1;
+	}		
+	dis1=(ave[0]+ave[1]+ave[2])/3;
+	error[0]=fabs(ave[0]-dis1);
+	error[1]=fabs(ave[1]-dis1);
+	error[2]=fabs(ave[2]-dis1);
+	if(error[0]<=error[1]&&error[0]<=error[2])
+		dis1=ave[0];
+	else if(error[1]<=error[0]&&error[1]<=error[2])
+		dis1=ave[1];
+	else dis1=ave[2];
 }
 
 void hc2_running(void)
 {
+	for(i=0;i<3;i++)
+	{
 		PBout(15)=1;
 		delay_us(15);
 		PBout(15)=0;
@@ -70,11 +89,24 @@ void hc2_running(void)
 		tim=tim+cnt*10;
 		dis2=tim*0.017-SIDE;
 		TIM2->CNT=0;											
-		cnt=0; 	
+		cnt=0; 
+		ave[i]=dis2;
+	}		
+	dis2=(ave[0]+ave[1]+ave[2])/3;
+	error[0]=fabs(ave[0]-dis2);
+	error[1]=fabs(ave[1]-dis2);
+	error[2]=fabs(ave[2]-dis2);
+	if(error[0]<=error[1]&&error[0]<=error[2])
+		dis2=ave[0];
+	else if(error[1]<=error[0]&&error[1]<=error[2])
+		dis2=ave[1];
+	else dis2=ave[2];		
 }
 
 void hc3_running(void)
 {
+	for(i=0;i<3;i++)
+	{
 		PAout(9)=1;
 		delay_us(15);
 		PAout(9)=0;
@@ -86,11 +118,24 @@ void hc3_running(void)
 		tim=tim+cnt*10;
 		dis3=tim*0.017-SIDE;
 		TIM2->CNT=0;											
-		cnt=0; 	
+		cnt=0; 
+		ave[i]=dis3;
+	}		
+	dis3=(ave[0]+ave[1]+ave[2])/3;
+	error[0]=fabs(ave[0]-dis3);
+	error[1]=fabs(ave[1]-dis3);
+	error[2]=fabs(ave[2]-dis3);
+	if(error[0]<=error[1]&&error[0]<=error[2])
+		dis3=ave[0];
+	else if(error[1]<=error[0]&&error[1]<=error[2])
+		dis3=ave[1];
+	else dis3=ave[2];		
 }
 
 void hc4_running(void)
 {
+	for(i=0;i<3;i++)
+	{
 		PAout(11)=1;
 		delay_us(15);
 		PAout(11)=0;
@@ -103,10 +148,23 @@ void hc4_running(void)
 		dis4=tim*0.017-SIDE;
 		TIM2->CNT=0;											
 		cnt=0; 
+		ave[i]=dis4;
+	}		
+	dis4=(ave[0]+ave[1]+ave[2])/3;
+	error[0]=fabs(ave[0]-dis4);
+	error[1]=fabs(ave[1]-dis4);
+	error[2]=fabs(ave[2]-dis4);
+	if(error[0]<=error[1]&&error[0]<=error[2])
+		dis4=ave[0];
+	else if(error[1]<=error[0]&&error[1]<=error[2])
+		dis4=ave[1];
+	else dis4=ave[2];	
 }
 
 void hc5_running(void)
 {
+	for(i=0;i<3;i++)
+	{
 		PAout(15)=1;
 		delay_us(15);
 		PAout(15)=0;
@@ -119,11 +177,24 @@ void hc5_running(void)
 		dis5=tim*0.017-SIDE;
 		TIM2->CNT=0;											
 		cnt=0; 
+		ave[i]=dis5;
+	}		
+	dis5=(ave[0]+ave[1]+ave[2])/3;
+	error[0]=fabs(ave[0]-dis5);
+	error[1]=fabs(ave[1]-dis5);
+	error[2]=fabs(ave[2]-dis5);
+	if(error[0]<=error[1]&&error[0]<=error[2])
+		dis5=ave[0];
+	else if(error[1]<=error[0]&&error[1]<=error[2])
+		dis5=ave[1];
+	else dis5=ave[2];	
 	
 }
 
 void hc6_running(void)
 {
+	for(i=0;i<3;i++)
+	{
 		PBout(4)=1;
 		delay_us(15);
 		PBout(4)=0;
@@ -136,11 +207,24 @@ void hc6_running(void)
 		dis6=tim*0.017-SIDE;
 		TIM2->CNT=0;											
 		cnt=0; 
+		ave[i]=dis6;
+	}		
+	dis6=(ave[0]+ave[1]+ave[2])/3;
+	error[0]=fabs(ave[0]-dis6);
+	error[1]=fabs(ave[1]-dis6);
+	error[2]=fabs(ave[2]-dis6);
+	if(error[0]<=error[1]&&error[0]<=error[2])
+		dis6=ave[0];
+	else if(error[1]<=error[0]&&error[1]<=error[2])
+		dis6=ave[1];
+	else dis6=ave[2];	
 	
 }
 
 void hc7_running(void)
 {
+	for(i=0;i<3;i++)
+	{
 		PBout(8)=1;
 		delay_us(15);
 		PBout(8)=0;
@@ -153,6 +237,17 @@ void hc7_running(void)
 		dis7=tim*0.017-SIDE;
 		TIM2->CNT=0;											
 		cnt=0; 
+		ave[i]=dis7;
+	}		
+	dis7=(ave[0]+ave[1]+ave[2])/3;
+	error[0]=fabs(ave[0]-dis7);
+	error[1]=fabs(ave[1]-dis7);
+	error[2]=fabs(ave[2]-dis7);
+	if(error[0]<=error[1]&&error[0]<=error[2])
+		dis7=ave[0];
+	else if(error[1]<=error[0]&&error[1]<=error[2])
+		dis7=ave[1];
+	else dis7=ave[2];	
 	
 }
 

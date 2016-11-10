@@ -31,3 +31,4 @@
 ..\obj\hc04.o: ..\SYSTEM\sys\sys.h
 ..\obj\hc04.o: ..\SYSTEM\delay\delay.h
 ..\obj\hc04.o: ..\HARDWARE\hc04\hc04.h
+..\obj\hc04.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

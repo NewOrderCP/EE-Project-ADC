@@ -49,73 +49,51 @@ extern int d1,d2,d3,d4;
 
 	while(1)
 	{
-		hc1_running();
-		if(dis1<200)
-		{
-			sprintf((char*)display1,"1: %6.3f",dis1);
-			OLED_ShowStr(0,0,display1,2);//显示HC1的值
-		}
-		else dis1=0;
+//		hc1_running();
+//		sprintf((char*)display1,"1:%4.1f",dis1);
+//		OLED_ShowStr(0,0,display1,2);//显示HC1的值
 
-		hc2_running();
-		if(dis2<60)
-		{
-			sprintf((char*)display1,"2: %6.3f",dis2);
-			OLED_ShowStr(0,2,display1,2);//显示HC2的值
-		}
-		else dis2=0;
-		
-		hc3_running();
-		if(dis3<60)
-		{
-			sprintf((char*)display1,"3: %6.3f",dis3);
-			OLED_ShowStr(0,2,display1,2);//显示HC3的值
-		}
-		else dis3=0;
-		
-		hc4_running();
-		if(dis4<60)
-		{
-			sprintf((char*)display1,"4: %6.3f",dis4);
-			OLED_ShowStr(0,2,display1,2);//显示HC4的值
-		}
-		else dis4=0;
-		
-		hc5_running();
-		if(dis5<60)
-		{
-			sprintf((char*)display1,"5: %6.3f",dis5);
-			OLED_ShowStr(0,2,display1,2);//显示HC5的值
-		}
-		else dis5=0;
+//		hc2_running();
+//		sprintf((char*)display1,"2:%4.1f",dis2);
+//		OLED_ShowStr(64,0,display1,2);//显示HC2的值
+//	
+//		hc3_running();
+//		sprintf((char*)display1,"3:%4.1f",dis3);
+//		OLED_ShowStr(0,2,display1,2);//显示HC3的值
+//		
+//		hc4_running();
+//		sprintf((char*)display1,"4:%4.1f",dis4);
+//		OLED_ShowStr(64,2,display1,2);//显示HC4的值
+//		
+//		hc5_running();
+//		sprintf((char*)display1,"5:%5.2f",dis5);
+//		OLED_ShowStr(0,4,display1,2);//显示HC5的值
 
-		hc6_running();
-		if(dis6<120)
-		{
-			sprintf((char*)display1,"6: %6.3f",dis6);
-			OLED_ShowStr(0,4,display1,2);//显示HC6的值
-		}
-		else dis6=0;
+//		hc6_running();
+//		sprintf((char*)display1,"6:%5.2f",dis6);
+//		OLED_ShowStr(64,4,display1,2);//显示HC6的值
+//		
+//		hc7_running();
+//		sprintf((char*)display1,"7:%4.1f",dis7);
+//		OLED_ShowStr(0,6,display1,2);//显示HC7的值
+//		
+//		OLED_Fill(0x00);					//OLED全屏灭
+
+		fromOtoD();									//起点到D
 		
-		hc7_running();
-		if(dis7<120)
-		{
-			sprintf((char*)display1,"7: %6.3f",dis7);
-			OLED_ShowStr(0,4,display1,2);//显示HC7的值
-		}
-		else dis7=0;
-		
-		while(d1)
-		{
-			fromOtoD();									//起点到D库
-			delay_ms(10);
-		}
-		
-		while(d2)
-		{
-			fromDtoC();									//D库到C库
-			delay_ms(10);
-		}
+		while(1);
+//		
+//		while(d2)
+//		{
+//			fromDtoC();									//D库到C库
+//			delay_ms(10);
+//		}
+//		
+//		while(d3)
+//		{
+//			fromCtoO();									//D库到C库
+//			delay_ms(10);
+//		}
 		
 		
 //		key=KEY_Scan(0);
