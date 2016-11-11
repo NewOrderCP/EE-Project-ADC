@@ -4,7 +4,7 @@
 #include "hc04.h"
 #include "math.h"
 
-#define SIDE 3
+#define SIDE 0
 
 u16 cnt;    //计数限定最大距离  在hcrs04.h中可见
 u32 tim;		//定时时间    在hcrs04.h中可见

@@ -11,9 +11,7 @@
 
 extern float dis1,dis2,dis3,dis4,dis5,dis6,dis7 ;	
 u32 hc_send;
-
-extern int p1,p2,p3,p4,p5,p6,p7;
-extern int d1,d2,d3,d4;
+int cmd=0;
 	
  int main(void)
  { 	 
@@ -22,8 +20,9 @@ extern int d1,d2,d3,d4;
 	float temp;	 
 	u8 display1[16];	
 	u8 display2[16];
+	u8 reclen=0;
 	 
-	d1=1;		//等于1开循环，等于0关循环只检测超声波
+	 int cmd0;
 	 
 //	 FLASH_Unlock();
 //	 FLASH_ReadOutProtection(DISABLE);
@@ -49,53 +48,38 @@ extern int d1,d2,d3,d4;
 
 	while(1)
 	{
-//		hc1_running();
-//		sprintf((char*)display1,"1:%4.1f",dis1);
-//		OLED_ShowStr(0,0,display1,2);//显示HC1的值
+		fromOtoA();									//起点到D
 
-//		hc2_running();
-//		sprintf((char*)display1,"2:%4.1f",dis2);
-//		OLED_ShowStr(64,0,display1,2);//显示HC2的值
-//	
-//		hc3_running();
-//		sprintf((char*)display1,"3:%4.1f",dis3);
-//		OLED_ShowStr(0,2,display1,2);//显示HC3的值
-//		
-//		hc4_running();
-//		sprintf((char*)display1,"4:%4.1f",dis4);
-//		OLED_ShowStr(64,2,display1,2);//显示HC4的值
-//		
-//		hc5_running();
-//		sprintf((char*)display1,"5:%5.2f",dis5);
-//		OLED_ShowStr(0,4,display1,2);//显示HC5的值
-
-//		hc6_running();
-//		sprintf((char*)display1,"6:%5.2f",dis6);
-//		OLED_ShowStr(64,4,display1,2);//显示HC6的值
-//		
-//		hc7_running();
-//		sprintf((char*)display1,"7:%4.1f",dis7);
-//		OLED_ShowStr(0,6,display1,2);//显示HC7的值
-//		
-//		OLED_Fill(0x00);					//OLED全屏灭
-
-		fromOtoD();									//起点到D
+		fromAtoB();									//D库到C库
+	
+		fromBtoO();									//D库到C库
+		
+		while(cmd==0)		
+		{
+			hc_send=111;							//停止指令
+			sprintf((char*)display1,"BT: %d",hc_send);
+			OLED_ShowStr(0,6,display1,2);			//显示发送数据	
+			u2_printf("%d\r\n",hc_send);			//发送到蓝牙模块
+			
+			if(USART2_RX_STA&0X8000)
+			{
+				reclen=USART2_RX_STA&0X7FFF;	//得到数据长度
+				USART2_RX_BUF[reclen]=0;	 	//加入结束符
+				USART2_RX_STA=0;
+				cmd0=1000*(USART2_RX_BUF[0]-48)+100*(USART2_RX_BUF[1]-48)+10*(USART2_RX_BUF[2]-48)+(USART2_RX_BUF[3]-48);	
+				if(cmd0==1122||cmd0==1212||cmd0==2112||cmd0==1221||cmd0==2121||cmd0==2211||cmd0==1222||cmd0==2122||cmd0==2221)
+				{
+					cmd=cmd0;
+					sprintf((char*)display1,"Receive: %d",cmd);
+					OLED_ShowStr(0,4,display1,2);			//显示发送数据	
+				}
+			}				
+		}	
+		
+		fromOtoX();
 		
 		while(1);
-//		
-//		while(d2)
-//		{
-//			fromDtoC();									//D库到C库
-//			delay_ms(10);
-//		}
-//		
-//		while(d3)
-//		{
-//			fromCtoO();									//D库到C库
-//			delay_ms(10);
-//		}
-		
-		
+			
 //		key=KEY_Scan(0);
 //		if(key==KEY0_PRES)						//切换模块主从设置
 //		{
