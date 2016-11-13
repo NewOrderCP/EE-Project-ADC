@@ -28,7 +28,7 @@ int cmd=0;
 //	 FLASH_ReadOutProtection(DISABLE);
 	 
 	delay_init();	    	 //延时函数初始化	  
-	uart_init(9600);	 	//串口初始化为9600
+//	uart_init(9600);	 	//串口初始化为9600
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //设置NVIC中断分组2:2位抢占优先级，2位响应优先级
 	HC_SR04_Init();	 					//超声波初始化
 	I2C_Configuration();				//I2C初始化
@@ -48,11 +48,11 @@ int cmd=0;
 
 	while(1)
 	{
-		fromOtoA();									//起点到D
+//		fromOtoA();									//起点到D
 
-		fromAtoB();									//D库到C库
-	
-		fromBtoO();									//D库到C库
+//		fromAtoB();									//D库到C库
+//	
+//		fromBtoO();									//D库到C库
 		
 		while(cmd==0)		
 		{
